@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=8, IE=9, IE=edge" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon">
+    
+    <title>@ViewBag.pageTitle - Lear Benchmarking</title>
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/css")    
+    @Html.Raw(ViewBag.zsiLibJSLink)    
+    <script>
+        var base_url = '@Url.Content("~/")';
+        var controller_url = '@this.Context.Request.RequestContext.RouteData.Values["controller"].ToString()';
+    </script>
+</head>
+<body>
+    <div class="progressWindow">
+        <div class="loadingImg"></div>
+        <div class="loadingText">Loading...Please wait</div>
+    </div>
+    <div class="errorWindow">
+        Some processe(s) encountered a problem.
+        <br> Please Contact System Administrator.
+    </div>
+
+    <div class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="@Url.Content("~/")" class="navbar-brand"><img style="margin-top:-16px" src="/images/lear-bms-logo.png"></a>
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse" id="navbar-main">
+                <div id="menuPanel"> </div>
+                <ul class="nav navbar-nav navbar-right">
+                    @{ string role = (ViewBag.role == null ? "(No Role)" : ViewBag.role); }
+					<li><a href="/page/name/signin"><span class="glyphicon glyphicon-off"></span> Logout </a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> @User.Identity.Name.Replace("CORPLEAR\\", "") @role </a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    @Html.Raw(ViewBag.appStartLink)
+    <div class="container-fluid page">
+        @RenderBody()
+    </div>
+
+@{
+    if (Session["zsi_login"] != null)
+    {
+        if (Session["zsi_login"].ToString() == "Y")
+        {
+
+            <div class='debugPanel noprint'>     
+                  <a href="/pagetemplate/source/@ViewBag.pageName" target="_blank">Edit Page Template</a> 
+                | <a href="/javascript/source/@ViewBag.pageName" target="_blank">Edit Javascript</a> 
+                | <a href="/page" target="_blank">Pages</a>         
+                | <a href="/pagetemplate" target="_blank">Page Templates</a>
+                | <a href="/javascript" target="_blank">JavaScripts</a>
+		        | <a href="/sql" target="_blank">SQL Console</a>
+            </div> 
+            }
+        }
+    }
+
+     <footer >
+            <p class="noprint">&copy; @DateTime.Now.Year - Powered By ZettaSolutions, Inc.</p>
+       </footer>
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+<div class="alert alert-success">
+    <p>Data has been saved.</p>
+</div>
+</body>
+</html>

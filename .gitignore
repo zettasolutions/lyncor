@@ -1,0 +1,3 @@
+*.suo
+Web/app/bin/*
+Web/app/obj/*

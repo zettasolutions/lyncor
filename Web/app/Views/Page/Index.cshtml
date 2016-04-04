@@ -1,0 +1,122 @@
+﻿
+@{
+    ViewBag.Title = "Page List";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+<div class="pageTitle">@ViewBag.Title </div>
+<div class="row">
+    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+        <form method="post" id="frm">
+			<div class="zPanel">
+            <table id="grid" class="fullWidth">
+                <thead>
+                    <tr>
+                        <th style="width: 25px"></th>
+                        <th>Page Name</th>
+                        <th>Page Title</th>
+                        <th>Master Page</th>
+                        <th>URL</th>
+                        <th>Template </th>
+                        <th>JavaScript</th>
+
+                    </tr>
+                </thead>
+				 <tfoot><tr><td colspan="7">&nbsp;</td></tr></tfoot>
+            </table>
+			</div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="buttonGroup">
+        <button type="button" class="btn btn-primary btn-sm" id="btnSave">
+            <span class="glyphicon glyphicon-floppy-disk"></span> Save
+        </button>
+        <button type="button" class="btn btn-primary btn-sm" id="btnDelete">
+            <span class="glyphicon glyphicon-trash"></span> Delete
+        </button>
+    </div>
+</div>
+
+<script>
+    var bs = zsi.bs.ctrl;
+    var gArr = null;
+    $(document).ready(function () {
+        displayRecords();
+    });
+
+
+    $("#btnSave").click(function () {
+        $("#frm").jsonSubmit({
+              url: controller_url + "update"
+            , onComplete: function (data) {
+                $("#grid").clearGrid();
+                displayRecords();
+
+            }
+        });
+    });
+
+    function displayRecords() {
+        var rownum = 0;
+        $("#grid").loadData({
+              url: base_url + "sql/exec?p=pages_sel"
+            , td_body: [
+                function (d) {
+                    return bs({ name: "page_id", type: "hidden", value: d.page_id })
+                            + bs({ name: "cb", type: "checkbox" });
+                }
+                , function (d) { return bs({ name: "page_name", value: d.page_name }); }
+                , function (d) { return bs({ name: "page_title", value: d.page_title }); }
+                , function (d) { return bs({ name: "master_page_id", value: d.master_page_id, type:"select" }); }
+                , function (d) { return '<a target="_blank" href="/page/name/' + d.page_name + '"> view page</a>'; }
+                , function (d) { return '<a target="_blank" href="/pagetemplate/source/' + d.page_name + '">open source</a>'; }
+                , function (d) { return '<a target="_blank" href="/javascript/source/' + d.page_name + '"> open source</a>'; }
+
+            ]
+            , onComplete: function () {
+                displayBlankRows();
+            }
+        });
+    }
+
+
+    function displayBlankRows() {
+        var inputCls = "form-control input-sm";
+        $("#grid").loadData({
+              td_body: [
+                function () {
+                    return bs({ name: "page_id", type: "hidden" })
+                           + bs({ name: "cb", type: "checkbox" });
+                }
+               , function () { return bs({ name: "page_name" }); }
+               , function () { return bs({ name: "page_title" }); }
+               , function () {
+                   return bs({ name: "master_page_id", type: "select" });
+               }
+               , function () { return ''; }
+               , function () { return ''; }
+               , function () { return ''; }
+            ]
+            , onComplete: function () {
+                $("select[name='master_page_id']").dataBind(base_url + "selectoption/code/masterpages");
+            }
+        });
+
+
+    }
+
+
+
+
+    $("#btnDelete").click(function () {
+        zsi.form.deleteData({
+            code       : "sys-0003"
+            ,onComplete: function (data) {
+                displayRecords();
+            }
+        });
+    });
+
+
+</script>
