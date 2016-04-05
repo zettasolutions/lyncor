@@ -67,7 +67,10 @@ namespace lyncor.Controllers
                 Response.Cookies["zsi_login"].Value = "Y";
                 Response.Cookies["zsi_login"].Expires = DateTime.Now.AddDays(1);
 
-                return Redirect("/page/name/" + info.default_page);
+                if (info.default_page!=null)
+                    return Redirect("/page/name/" + info.default_page);
+                else
+                    return Redirect( Url.Content("~/"));
 
             }
             else {
@@ -76,7 +79,20 @@ namespace lyncor.Controllers
             }
 
         }
- 
+
+
+        [HttpPost]
+        public ActionResult loginUser()
+        {
+                dcAppProfile dc = new dcAppProfile();
+                appProfile info = dc.GetInfo();
+
+                if (info.default_page != null)
+                    return Redirect("/page/name/" + info.default_page);
+                else
+                    return Redirect(Url.Content("~/"));
+        }
+
 
 
         [HttpPost, ValidateInput(false)]

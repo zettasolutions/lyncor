@@ -145,6 +145,7 @@ namespace lyncor
                 cmd.Parameters.AddWithValue("@page_url", "db:" + procedure);
                 cmd.Parameters.AddWithValue("@error_msg", errMessage);
                 cmd.Parameters.AddWithValue("@error_type", type);
+                cmd.Parameters.AddWithValue("@user_id", SessionHandler.CurrentUser.user_id);
                 conn.Open();
                 cmd.ExecuteNonQuery();
                 conn.Close();
