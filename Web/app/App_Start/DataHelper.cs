@@ -95,7 +95,9 @@ namespace lyncor
                 {
                     SqlCommand cmd = new SqlCommand(procedureName, conn);
                     cmd.CommandType = CommandType.StoredProcedure;
+
                     SqlParameter tvparam = cmd.Parameters.AddWithValue("@tt", dt);
+                    cmd.Parameters.AddWithValue("@user_id", SessionHandler.CurrentUser.user_id);
                     tvparam.SqlDbType = SqlDbType.Structured;
                     SqlParameter retval = new SqlParameter();
                     retval.ParameterName = "@return_value";

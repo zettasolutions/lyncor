@@ -49,7 +49,7 @@ namespace lyncor.Controllers
         private int getAuthNo()
         {
             string key = "authNo";
-            if (Session[key] == null) Session[key] = DataHelper.getDbValue("select dbo.getAuthNo()");
+            if (Session[key] == null) Session[key] = DataHelper.getDbValue("select dbo.getAuthNo(" + this.CurrentUser.user_id + ")");
             return Convert.ToInt32("0" + Session[key]);
         }
 

@@ -9,7 +9,6 @@ namespace lyncor.Models
         public string page_name { get; set; }
         public string page_title { get; set; }
         public int? master_page_id { get; set; }
-        public int user_id { get { return 0; } }
     }
 
     public class page_v : page

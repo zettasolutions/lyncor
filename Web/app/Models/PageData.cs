@@ -21,14 +21,18 @@ namespace lyncor.Models
         public override void InitDataController()
         {
             this.DBConn = new SqlConnection(dbConnection.ConnectionString);
-            this.Procedures.Add(new Procedure("dbo.page_data_sel"), SQLCommandType.SingleRecord);
+            Procedure p = new Procedure("dbo.page_data_sel");
+            p.Parameters.Add("user_id", SessionHandler.CurrentUser.user_id);
+            this.Procedures.Add(p, SQLCommandType.SingleRecord);
 
         }
         public PageData GetData(string pageName) {
             if (pageName !=null)
             {
-                this.SelectInfoParameters.Add("page_name", pageName);
-                return this.GetInfo();
+                SProcParameters p = new SProcParameters();
+                p.Add("page_name", pageName);
+                p.Add("user_id", SessionHandler.CurrentUser.user_id);
+                return this.GetInfo(p);
             }
             else
                 return new PageData();
