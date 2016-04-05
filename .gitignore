@@ -3,3 +3,4 @@ Web/app/bin/*
 Web/app/obj/*
 Web/app/ace/*
 Web/packages/*
+Web/.vs/config/applicationhost.config
