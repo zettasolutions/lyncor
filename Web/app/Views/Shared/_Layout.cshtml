@@ -4,7 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=8, IE=9, IE=edge" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="@Url.Content("~/")favicon.png" type="image/x-icon">
     
     <title>@ViewBag.pageTitle - Lear Benchmarking</title>
     @Scripts.Render("~/bundles/jquery")
@@ -39,7 +39,7 @@
                 <div id="menuPanel"> </div>
                 <ul class="nav navbar-nav navbar-right">
                     @{ string role = (ViewBag.role == null ? "(No Role)" : ViewBag.role); }
-					<li><a href="/page/name/signin"><span class="glyphicon glyphicon-off"></span> Logout </a></li>
+					<li><a href="@Url.Content("~/")page/name/signin"><span class="glyphicon glyphicon-off"></span> Logout </a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-user"></span> @User.Identity.Name.Replace("CORPLEAR\\", "") @role </a></li>
                 </ul>
             </div>
@@ -57,11 +57,11 @@
         {
 
             <div class='debugPanel noprint'>     
-                  <a href="/pagetemplate/source/@ViewBag.pageName" target="_blank">Edit Page Template</a> 
-                | <a href="/javascript/source/@ViewBag.pageName" target="_blank">Edit Javascript</a> 
-                | <a href="/page" target="_blank">Pages</a>         
-                | <a href="/pagetemplate" target="_blank">Page Templates</a>
-                | <a href="/javascript" target="_blank">JavaScripts</a>
+                  <a href="@Url.Content("~/")pagetemplate/source/@ViewBag.pageName" target="_blank">Edit Page Template</a> 
+                | <a href="@Url.Content("~/")javascript/source/@ViewBag.pageName" target="_blank">Edit Javascript</a> 
+                | <a href="@Url.Content("~/")page" target="_blank">Pages</a>         
+                | <a href="@Url.Content("~/")pagetemplate" target="_blank">Page Templates</a>
+                | <a href="@Url.Content("~/")javascript" target="_blank">JavaScripts</a>
 		        | <a href="/sql" target="_blank">SQL Console</a>
             </div> 
             }

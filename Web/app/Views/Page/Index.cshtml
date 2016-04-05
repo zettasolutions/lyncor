@@ -69,9 +69,9 @@
                 , function (d) { return bs({ name: "page_name", value: d.page_name }); }
                 , function (d) { return bs({ name: "page_title", value: d.page_title }); }
                 , function (d) { return bs({ name: "master_page_id", value: d.master_page_id, type:"select" }); }
-                , function (d) { return '<a target="_blank" href="/page/name/' + d.page_name + '"> view page</a>'; }
-                , function (d) { return '<a target="_blank" href="/pagetemplate/source/' + d.page_name + '">open source</a>'; }
-                , function (d) { return '<a target="_blank" href="/javascript/source/' + d.page_name + '"> open source</a>'; }
+                , function (d) { return '<a target="_blank" href="' + base_url + 'page/name/' + d.page_name + '"> view page</a>'; }
+                , function (d) { return '<a target="_blank" href="' + base_url + 'pagetemplate/source/' + d.page_name + '">open source</a>'; }
+                , function (d) { return '<a target="_blank" href="' + base_url + 'javascript/source/' + d.page_name + '"> open source</a>'; }
 
             ]
             , onComplete: function () {

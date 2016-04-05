@@ -4,7 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=8, IE=9, IE=edge" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="@Url.Content("~/")favicon.png" type="image/x-icon">
     <title>@ViewBag.Title - Lear Benchmarking</title>
     @Scripts.Render("~/bundles/jquery")
     @Styles.Render("~/Content/css")
@@ -12,7 +12,7 @@
         var base_url = '@Url.Content("~/")';
         var controller_url = base_url + '@this.Context.Request.RequestContext.RouteData.Values["controller"].ToString()/';
     </script>
-    <script type="text/javascript" src="/Scripts/zsiLib.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/")Scripts/zsiLib.js"></script>
     <style>
         .modal-dialog {
             width: 95%;
@@ -59,7 +59,7 @@
             <div id="menuPanel"> </div>
             <ul class="nav navbar-nav navbar-right">
                 @{ string role = (ViewBag.role == null ? "(No Role)" : ViewBag.role); }
-				<li><a href="/page/name/signin"><span class="glyphicon glyphicon-off"></span> Logout </a></li>
+				<li><a href="@Url.Content("~/")page/name/signin"><span class="glyphicon glyphicon-off"></span> Logout </a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-user"></span> @User.Identity.Name @role </a></li>
             </ul>
         </div>
@@ -76,10 +76,10 @@
         if (Session["zsi_login"].ToString() == "Y")
         {
             <div class='debugPanel noprint'>              
-                  <a href="/page" target="_blank">Pages</a>
-                | <a href="/pagetemplate" target="_blank">Page Templates</a>
-                | <a href="/javascript" target="_blank">JavaScripts</a>
-			    | <a href="/sql" target="_blank">SQL Console</a>			
+                  <a href="@Url.Content("~/")page" target="_blank">Pages</a>
+                | <a href="@Url.Content("~/")pagetemplate" target="_blank">Page Templates</a>
+                | <a href="@Url.Content("~/")javascript" target="_blank">JavaScripts</a>
+			    | <a href="@Url.Content("~/")sql" target="_blank">SQL Console</a>			
             </div> 
         }
     }
@@ -88,8 +88,8 @@
 	<p>&copy; @DateTime.Now.Year - Powered By ZettaSolutions, Inc.</p>
 </footer>
 
-<script src="/ace/src-noconflict/ace.js"></script>
-<script src="/ace/src-noconflict/ext-language_tools.js"></script>
+<script src="@Url.Content("~/")ace/src-noconflict/ace.js"></script>
+<script src="@Url.Content("~/")ace/src-noconflict/ext-language_tools.js"></script>
 @Scripts.Render("~/bundles/bootstrap")
 <div class="alert alert-success">
     <p>Data has been saved.</p>
