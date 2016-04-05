@@ -38,7 +38,7 @@ namespace lyncor.Controllers
                 if (getAuthNo() == 999)
                 {
                     if (Session["zsi_login"].ToString() == "N")
-                        return Redirect("/page/name/" + devURL);
+                        return Redirect( Url.Content("~/") + "page/name/" + devURL);
                 }
             }
             setPageLinks(param1);
@@ -68,14 +68,14 @@ namespace lyncor.Controllers
                 Response.Cookies["zsi_login"].Expires = DateTime.Now.AddDays(1);
 
                 if (info.default_page!=null)
-                    return Redirect("/page/name/" + info.default_page);
+                    return Redirect(Url.Content("~/") + "page/name/" + info.default_page);
                 else
                     return Redirect( Url.Content("~/"));
 
             }
             else {
                 Session["zsi_login"] ="N";
-                return Redirect("/page/name/zsiUserLogin");
+                return Redirect( Url.Content("~/") + "page/name/zsiUserLogin");
             }
 
         }
@@ -88,7 +88,7 @@ namespace lyncor.Controllers
                 appProfile info = dc.GetInfo();
 
                 if (info.default_page != null)
-                    return Redirect("/page/name/" + info.default_page);
+                    return Redirect(Url.Content("~/") + "page/name/" + info.default_page);
                 else
                     return Redirect(Url.Content("~/"));
         }

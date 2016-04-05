@@ -14,7 +14,7 @@ namespace lyncor.Controllers
              dcAppProfile dc = new dcAppProfile();
              appProfile info = dc.GetInfo();
             if (info.default_page != null)
-                return Redirect("/page/name/" + info.default_page);
+                return Redirect(Url.Content("~/") + "page/name/" + info.default_page);
             else {
                 return View();
             }
@@ -25,7 +25,7 @@ namespace lyncor.Controllers
             if ((bool)(Session["IsEntered"] ?? false))
             {
                 Session["IsEntered"] = false;
-                return Redirect("/");
+                return Redirect(Url.Content("~/") );
             }
             else
             {
