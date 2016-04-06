@@ -40,7 +40,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     @{ string role = (ViewBag.role == null ? "(No Role)" : ViewBag.role); }
 					<li><a href="@Url.Content("~/")page/name/signin"><span class="glyphicon glyphicon-off"></span> Logout </a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> @User.Identity.Name.Replace("CORPLEAR\\", "") @role </a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> @User.Identity.Name @role </a></li>
                 </ul>
             </div>
         </div>
@@ -62,7 +62,7 @@
                 | <a href="@Url.Content("~/")page" target="_blank">Pages</a>         
                 | <a href="@Url.Content("~/")pagetemplate" target="_blank">Page Templates</a>
                 | <a href="@Url.Content("~/")javascript" target="_blank">JavaScripts</a>
-		        | <a href="/sql" target="_blank">SQL Console</a>
+		        | <a href="@Url.Content("~/")sql" target="_blank">SQL Console</a>
             </div> 
             }
         }
