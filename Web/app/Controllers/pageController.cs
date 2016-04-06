@@ -84,6 +84,9 @@ namespace lyncor.Controllers
         [HttpPost]
         public ActionResult loginUser()
         {
+            dcUsers _dcUser = new dcUsers();
+            if (_dcUser.validateUser(Request["user_name"], Request["user_pwd"])){
+
                 dcAppProfile dc = new dcAppProfile();
                 appProfile info = dc.GetInfo();
 
@@ -91,8 +94,10 @@ namespace lyncor.Controllers
                     return Redirect(Url.Content("~/") + "page/name/" + info.default_page);
                 else
                     return Redirect(Url.Content("~/"));
+            }
+            else
+                return Redirect(Url.Content("~/") + "page/name/signin?msg=Access Denied!");
         }
-
 
 
         [HttpPost, ValidateInput(false)]
