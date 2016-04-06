@@ -85,8 +85,9 @@ namespace lyncor.Controllers
         public ActionResult loginUser()
         {
             dcUsers _dcUser = new dcUsers();
-            if (_dcUser.validateUser(Request["user_name"], Request["user_pwd"])){
-
+            string userName = Request["user_name"];
+            if (_dcUser.validateUser(userName, Request["user_pwd"])){
+                this.FormAuth.CreateUserSession(userName, true);
                 dcAppProfile dc = new dcAppProfile();
                 appProfile info = dc.GetInfo();
 
